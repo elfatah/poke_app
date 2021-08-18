@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/pokemonListFragment">
+
+    <fragment
+        android:id="@+id/pokemonListFragment"
+        android:name="com.elfatah.pokeapp.feature.pokemon.list.PokemonListFragment"
+        android:label="PokemonListFragment">
+        <action
+            android:id="@+id/toPokemonDetail"
+            app:destination="@id/pokemonListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonDetailFragment"
+        android:name="com.elfatah.pokeapp.feature.pokemon.detail.PokemonDetailFragment"
+        android:label="PokemonDetailFragment">
+        <argument
+            android:name="id"
+            app:argType="integer"
+            app:nullable="false" />
+    </fragment>
+</navigation>

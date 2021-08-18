@@ -1,20 +1,30 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'kotlin-android-extensions'
+
+
+def setup = [
+        baseUrl        : '"https://pokeapi.co/api/v2/"',
+        databaseName   : '"poke_database"',
+        databaseVersion: '1',
+]
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.elfatah.pokeapp"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', 'BASE_URL', setup.baseUrl
+        buildConfigField 'int', 'DATABASE_VERSION', setup.databaseVersion
+        buildConfigField 'String', 'DATABASE_NAME', setup.databaseName
     }
 
     buildTypes {
@@ -33,11 +43,55 @@ android {
 }
 
 dependencies {
+    def lifecycle_version = "2.4.0-alpha03"
+    def arch_version = "2.1.0"
+    def nav_version = "2.3.5"
+    def koin_version = "3.1.2"
+    def retrofitVersion = "2.9.0"
+    def loggingInterceptorVersion = '4.9.0'
+    def retrofitKotlinxVersion = "0.8.0"
+    def chuckOkHttpVersion = "1.1.0"
+    def serializationVersion = "1.0.0"
+
+
+    // Koin
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-android-compat:$koin_version"
+    implementation "io.insert-koin:koin-core:$koin_version"
+    testImplementation "io.insert-koin:koin-test:$koin_version"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
+
+    // Live data
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //Networking
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation("com.squareup.retrofit2:adapter-rxjava3:$retrofitVersion")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.8.1"
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
+    // Rx Libs
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
+    implementation "com.jakewharton.rxbinding4:rxbinding:4.0.0"
+
+
+    debugImplementation "com.readystatesoftware.chuck:library:1.1.0"
+    releaseImplementation "com.readystatesoftware.chuck:library-no-op:1.1.0"
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+
+
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
