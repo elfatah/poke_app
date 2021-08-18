@@ -8,7 +8,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity_layout)
-        val navController = Navigation.findNavController(this, R.id.navHostFragment)
-
+        Navigation.findNavController(this, R.id.navHostFragment)
     }
 }
