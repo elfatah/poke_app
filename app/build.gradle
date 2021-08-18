@@ -25,6 +25,14 @@ android {
         buildConfigField 'String', 'BASE_URL', setup.baseUrl
         buildConfigField 'int', 'DATABASE_VERSION', setup.databaseVersion
         buildConfigField 'String', 'DATABASE_NAME', setup.databaseName
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.schemaLocation": "$projectDir/schemas".toString(),
+                        "room.incremental"   : "true"]
+            }
+        }
     }
 
     buildTypes {
@@ -52,7 +60,12 @@ dependencies {
     def retrofitKotlinxVersion = "0.8.0"
     def chuckOkHttpVersion = "1.1.0"
     def serializationVersion = "1.0.0"
+    def room_version = "2.3.0"
 
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava3:$room_version"
+    implementation 'com.facebook.stetho:stetho:1.6.0'
 
     // Koin
     implementation "io.insert-koin:koin-android:$koin_version"

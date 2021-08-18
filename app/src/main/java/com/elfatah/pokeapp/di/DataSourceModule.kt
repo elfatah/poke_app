@@ -11,9 +11,9 @@ const val LOCAL_DATASOURCE = "LOCAL_DATASOURCE"
 
 val dataSourceModule = module {
     factory<PokemonDataSource>(named(NETWORK_DATASOURCE)) {
-        NetworkPokemonDataSource(get())
+        NetworkPokemonDataSource(get(), get())
     }
     factory<PokemonDataSource>(named(LOCAL_DATASOURCE)) {
-        LocalPokemonDataSource()
+        LocalPokemonDataSource(get())
     }
 }
