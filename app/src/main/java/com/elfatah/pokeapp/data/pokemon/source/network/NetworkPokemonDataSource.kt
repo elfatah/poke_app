@@ -1,8 +1,8 @@
 package com.elfatah.pokeapp.data.pokemon.source.network
 
 import com.elfatah.pokeapp.data.api.PokeApi
+import com.elfatah.pokeapp.data.pokemon.mapper.toPokemonEntity
 import com.elfatah.pokeapp.data.pokemon.model.PokemonDao
-import com.elfatah.pokeapp.data.pokemon.model.toPokemonEntity
 import com.elfatah.pokeapp.data.pokemon.source.PokemonDataSource
 import com.elfatah.pokeapp.domain.pokemon.model.Pokemon
 import io.reactivex.rxjava3.core.Observable
